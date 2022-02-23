@@ -20,6 +20,12 @@ class KeyboardService:
         """
         self._cell_size = cell_size
 
+    def artifact_direction(self):
+        direction = Point(0, -1)
+        direction = direction.scale(self._cell_size)
+        
+        return direction
+
     def get_direction(self):
         """Gets the selected direction based on the currently pressed keys.
 
