@@ -108,6 +108,7 @@ class Actor:
         """
         self._text = text
 
+
     def set_velocity(self, velocity):
         """Updates the velocity to the given one.
         

@@ -50,6 +50,7 @@ def main():
     robot.set_color(WHITE)
     robot.set_position(position)
     cast.add_actor("robots", robot)
+
     
     # create the artifacts
 
@@ -59,9 +60,9 @@ def main():
 
         text = random.choice(stones)
         if text == 'O':
-            points = '-10'
+            points = -10
         else:
-            points = '10'
+            points = 10
 
         x = random.randint(1, COLS - 1)
         y = random.randint(-40, 1)
@@ -78,7 +79,7 @@ def main():
         artifact.set_font_size(FONT_SIZE)
         artifact.set_color(color)
         artifact.set_position(position)
-        artifact.set_message(points)
+        artifact.set_point(points)
         cast.add_actor("artifacts", artifact)
     
     # start the game
