@@ -51,16 +51,12 @@ class Director:
         banner = cast.get_first_actor("banners")
         robot = cast.get_first_actor("robots")
         artifacts = cast.get_actors("artifacts")
-
-        for artifact in artifacts:
-         avelocity = self._keyboard_service.artifact_direction()
-        #    artifacts.set_velocity(avelocity)
+            
         
         
 
         #Added the Points:
-        
-        banner.set_text(f'Points: { self._score}')
+        banner.set_text(f"Points: { self._score}")
         max_x = self._video_service.get_width()
         max_y = self._video_service.get_height()
         robot.move_next(max_x, max_y)
@@ -71,7 +67,10 @@ class Director:
             if robot.get_position().equals(artifact.get_position()):
                 point = artifact.get_point()
                 self._score += point
-                banner.set_text(f'Points: { self._score}')
+                banner.set_text(f"Points: { self._score}")
+            velocity = self._keyboard_service.artifact_direction()
+            artifact.set_velocity(velocity)
+            artifact.move_next(max_x, max_y)
         
         
         

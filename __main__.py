@@ -59,7 +59,7 @@ def main():
         stones = ['o', '*']
 
         text = random.choice(stones)
-        if text == 'O':
+        if text == 'o':
             points = -10
         else:
             points = 10
