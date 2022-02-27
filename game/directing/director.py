@@ -1,3 +1,11 @@
+from tokenize import group
+from game.casting.cast import Cast
+from game.casting.artifact import Artifact
+from game.shared.point import Point
+from game.shared.color import Color
+import random
+
+
 class Director:
     """A person who directs the game. 
     
@@ -51,9 +59,6 @@ class Director:
         banner = cast.get_first_actor("banners")
         robot = cast.get_first_actor("robots")
         artifacts = cast.get_actors("artifacts")
-            
-        
-        
 
         #Added the Points:
         banner.set_text(f"Points: { self._score}")
@@ -61,13 +66,37 @@ class Director:
         max_y = self._video_service.get_height()
         robot.move_next(max_x, max_y)
         
-        
-        
         for artifact in artifacts:
             if robot.get_position().equals(artifact.get_position()):
                 point = artifact.get_point()
                 self._score += point
                 banner.set_text(f"Points: { self._score}")
+                cast.remove_actor("artifacts", artifact)
+                stones = ['o', '*']
+
+                text = random.choice(stones)
+                if text == 'o':
+                    points = -10
+                else:
+                    points = 10
+
+                x = random.randint(1, 60 - 1)
+                y = random.randint(-40, 1)
+                position = Point(x, y)
+                position = position.scale(15)
+
+                r = random.randint(0, 255)
+                g = random.randint(0, 255)
+                b = random.randint(0, 255)
+                color = Color(r, g, b)
+                
+                artifact = Artifact()
+                artifact.set_text(text)
+                artifact.set_font_size(32)
+                artifact.set_color(color)
+                artifact.set_position(position)
+                artifact.set_point(points)
+                cast.add_actor("artifacts", artifact)
             velocity = self._keyboard_service.artifact_direction()
             artifact.set_velocity(velocity)
             artifact.move_next(max_x, max_y)
